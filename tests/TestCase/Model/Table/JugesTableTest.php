@@ -46,7 +46,7 @@ class JugesTableTest extends TestCase
         'app.resultat_poules',
         'app.tirages',
         'app.notes',
-        'app.jures'
+        'app.jurys'
     ];
 
     /**
@@ -57,7 +57,7 @@ class JugesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Juges') ? [] : ['className' => 'App\Model\Table\JugesTable'];
+        $config = TableRegistry::exists('Juges') ? [] : ['className' => JugesTable::class];
         $this->Juges = TableRegistry::get('Juges', $config);
     }
 

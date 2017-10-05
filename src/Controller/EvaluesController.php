@@ -53,7 +53,7 @@ class EvaluesController extends AppController
             $evalue = $this->Evalues->patchEntity($evalue, $this->request->data);
         	
             if ($this->Evalues->save($evalue)) {
-                $this->Flash->success(__('L\évalué a été créé.'));
+                $this->Flash->success(__('L\'évalué a été créé.'));
             	$this->Utilitaire->logInBdd("Ajout de l\'évalué : ".$evalue->id." : licencié ".$evalue->livencie_id." pour le passage ".$evalue->passage_id);
              
             } else {

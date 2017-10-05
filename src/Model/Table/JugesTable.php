@@ -9,9 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Juges Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Passages
- * @property \Cake\ORM\Association\BelongsTo $Jurys
- * @property \Cake\ORM\Association\HasMany $Notes
+ * @property \App\Model\Table\PassagesTable|\Cake\ORM\Association\BelongsTo $Passages
+ * @property \App\Model\Table\JurysTable|\Cake\ORM\Association\BelongsTo $Jurys
+ * @property \App\Model\Table\NotesTable|\Cake\ORM\Association\HasMany $Notes
  *
  * @method \App\Model\Entity\Juge get($primaryKey, $options = [])
  * @method \App\Model\Entity\Juge newEntity($data = null, array $options = [])
@@ -19,7 +19,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Juge|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Juge patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Juge[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Juge findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Juge findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -36,9 +36,9 @@ class JugesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('juges');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('juges');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
@@ -79,8 +79,8 @@ class JugesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['jury_id'], 'Jurys'));
         $rules->add($rules->existsIn(['passage_id'], 'Passages'));
+        $rules->add($rules->existsIn(['jury_id'], 'Jurys'));
 
         return $rules;
     }

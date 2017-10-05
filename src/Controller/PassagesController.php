@@ -39,7 +39,7 @@ class PassagesController extends AppController
     	//Liste des inscris
     	$this->loadModel('Evalues');
 		$evalues = $this->Evalues->find()->contain(['Licencies','Grades'])
-		->where(['passage_id'=>$passage->id])->order('grade_presente_id desc, Licencies.ddn desc');;
+		->where(['passage_id'=>$passage->id])->order('grade_presente_id desc, evalues.numero asc, Licencies.ddn desc');;
     	//Liste des notes
     	//$this->loadModel('Notes');
 		//$notes = $this->Notes->find()->contain(['Licencies','Juges'])->where(['passage_id'=>$passage->id]);
