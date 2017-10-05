@@ -29,9 +29,9 @@ class JurysTableTest extends TestCase
         'app.licencies',
         'app.clubs',
         'app.regions',
+        'app.disciplines',
         'app.juges',
         'app.passages',
-        'app.disciplines',
         'app.evalues',
         'app.inscription_passages',
         'app.users',
@@ -57,7 +57,7 @@ class JurysTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Jurys') ? [] : ['className' => 'App\Model\Table\JurysTable'];
+        $config = TableRegistry::exists('Jurys') ? [] : ['className' => JurysTable::class];
         $this->Jurys = TableRegistry::get('Jurys', $config);
     }
 

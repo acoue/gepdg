@@ -9,11 +9,13 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $nom
  * @property string $prenom
+ * @property string $display_name
  * @property int $grade_id
  * @property int $actif
  * @property int $discipline_id
  *
  * @property \App\Model\Entity\Grade $grade
+ * @property \App\Model\Entity\Discipline $discipline
  * @property \App\Model\Entity\Juge[] $juges
  */
 class Jury extends Entity
@@ -29,7 +31,14 @@ class Jury extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'nom' => true,
+        'prenom' => true,
+        'display_name' => true,
+        'grade_id' => true,
+        'actif' => true,
+        'discipline_id' => true,
+        'grade' => true,
+        'discipline' => true,
+        'juges' => true
     ];
 }

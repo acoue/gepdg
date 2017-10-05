@@ -9,9 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Jurys Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Grades
- * @property \Cake\ORM\Association\BelongsTo $Disciplines
- * @property \Cake\ORM\Association\HasMany $Juges
+ * @property \App\Model\Table\GradesTable|\Cake\ORM\Association\BelongsTo $Grades
+ * @property \App\Model\Table\DisciplinesTable|\Cake\ORM\Association\BelongsTo $Disciplines
+ * @property \App\Model\Table\JugesTable|\Cake\ORM\Association\HasMany $Juges
  *
  * @method \App\Model\Entity\Jury get($primaryKey, $options = [])
  * @method \App\Model\Entity\Jury newEntity($data = null, array $options = [])
@@ -19,7 +19,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Jury|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Jury patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Jury[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Jury findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Jury findOrCreate($search, callable $callback = null, $options = [])
  */
 class JurysTable extends Table
 {
@@ -34,9 +34,9 @@ class JurysTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('jurys');
-        $this->displayField(['prenom','nom']);
-        $this->primaryKey('id');
+        $this->setTable('jurys');
+        $this->setDisplayField('display_name');
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Grades', [
             'foreignKey' => 'grade_id',
@@ -64,12 +64,19 @@ class JurysTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->scalar('nom')
             ->requirePresence('nom', 'create')
             ->notEmpty('nom');
 
         $validator
+            ->scalar('prenom')
             ->requirePresence('prenom', 'create')
             ->notEmpty('prenom');
+
+        $validator
+            ->scalar('display_name')
+            ->requirePresence('display_name', 'create')
+            ->notEmpty('display_name');
 
         $validator
             ->integer('actif')
